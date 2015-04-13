@@ -120,13 +120,24 @@ class OrderTest extends \PHPUnit_Framework_TestCase{
 
 
             [
-                ['items'=>[new Item([price=>10]),new Item([price=>10]),new Item([price=>7])],
+                ['items'=>[new Item([price=>10]),new Item([price=>10]),new Item([price=>7]), new Item([price=>34])],
                     'payments'=>[new Payment([payment=>4]),new Payment([payment=>5]),new Payment([payment=>2])]]
             ],
 
         ];
     }
 
+    /**
+     * @dataProvider ValidConstructorArguments
+     *
+     */
+    function testisPaidInFull(ARRAY $A){
+        $O = new Order($A);
+        $O->addPayment(new Payment([payment=>50]));
+        $this->assertTrue($O->isPaidInFull());
+
+
+    }
 
 
 
